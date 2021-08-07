@@ -18,7 +18,6 @@ def add(filepath: str):
         print(f'jsonstring: {jsontest[:100]}')
 
         conn = psycopg2.connect(host='localhost',
-
                                 user='postgres',
                                 password='postgres',
                                 database='postgres')  # To remove slash
