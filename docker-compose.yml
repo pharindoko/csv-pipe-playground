@@ -1,0 +1,63 @@
+version: "3.7"
+
+services:
+  # Deploy the broker.
+  rabbitmq_server:
+    image: rabbitmq:3-management
+    ports:
+      # Expose the port for the worker to add/get tasks
+      - 5672:5672
+      # OPTIONAL: Expose the GUI port
+      - 15672:15672
+
+  # Deploy the worker
+  worker:
+    # Build using the worker Dockerfile
+    build:
+      context: .
+      dockerfile: worker.Dockerfile
+    # Need to access the database
+    # OPTIONAL: If you worker needs to access your db that is deployed
+    # locally, then make the network mode as host.
+    network_mode: host
+    # Pass the rabbitmq_uri as env varible in order to
+    # connect to our service
+    environment:
+      # NOTE: Below we are using 127.0.0.1 because this container
+      # will run on the host network, thus it will have access to the
+      # host network.
+      # If it would not have run locally, we would have had to
+      # connect using the service name like following:
+      # amqp:rabbitmq_server:5672
+      rabbitmq_uri: amqp://127.0.0.1:5672
+    # Make it wait for rabbitmq deployment
+    depends_on:
+      - rabbitmq_server
+    volumes:
+      - ./:/app
+  watchdog:
+    # Build using the worker Dockerfile
+    build:
+      context: .
+      dockerfile: watch.Dockerfile
+    # Need to access the database
+    # OPTIONAL: If you worker needs to access your db that is deployed
+    # locally, then make the network mode as host.
+    network_mode: host
+    # Pass the rabbitmq_uri as env varible in order to
+    # connect to our service
+    environment:
+      # NOTE: Below we are using 127.0.0.1 because this container
+      # will run on the host network, thus it will have access to the
+      # host network.
+      # If it would not have run locally, we would have had to
+      # connect using the service name like following:
+      # amqp:rabbitmq_server:5672
+      rabbitmq_uri: amqp://127.0.0.1:5672
+    # Make it wait for rabbitmq deployment
+    depends_on:
+      - rabbitmq_server
+      - worker
+    volumes:
+      - ./:/app
+    restart: unless-stopped
