@@ -12,6 +12,7 @@ app = Celery('tasks', broker='pyamqp://guest@localhost//')
 @app.task
 def add(filepath: str):
     print(f'processing file: {filepath}')
+    conn = None
     try:
         df = pd.read_csv(filepath)
         jsontest = df.to_json()
@@ -28,9 +29,11 @@ def add(filepath: str):
         conn.commit()
         print(f'inserted record')
         cursor.close()
-        conn.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
+        if conn:
+            conn.close()
+            print('db connection closed')
         gc.collect()
     return
