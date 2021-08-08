@@ -9,6 +9,7 @@ celery = "*"
 pandas = "*"
 pyinotify = "*"
 psycopg2-binary = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 
