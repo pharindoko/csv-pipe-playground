@@ -2,7 +2,7 @@
 
 ## what the purpose ?
 
-process csv files in an event driven manner.
+playground project to get an understanding how processing csv files in an event driven manner can work using python and specific frameworks.
 
 ![csv pipe playground](/image/csv-pipe-playground.png)
 
@@ -12,8 +12,8 @@ process csv files in an event driven manner.
 2. Filewatcher event will be triggered
 3. Worker will be created via Rabbit MQ / Celery
 
-- Read CSV via Pandas
-- Store content as json in database
+   - Read CSV via Pandas
+   - Store content in database
 
 ## requirements
 
