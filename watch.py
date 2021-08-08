@@ -15,7 +15,7 @@ wm = pyinotify.WatchManager()  # Watch Manager
 mask = pyinotify.IN_CLOSE_WRITE  # watched events
 notifier = pyinotify.Notifier(wm, EventHandler())
 
-wdd = wm.add_watch(os.getcwd(), mask, rec=True)
+wdd = wm.add_watch(os.getcwd(), mask, rec=True,  auto_add=True)
 
 while True:
     try:
