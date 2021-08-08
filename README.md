@@ -1,10 +1,10 @@
-# csv-processing
+# csv-pipe-playground
 
 ## what the purpose ?
 
 process csv files in an event driven manner.
 
-![csv-processing](/image/csv-processing.png)
+![csv pipe playground](/image/csv-pipe-playground.png)
 
 ## steps
 
