@@ -24,6 +24,8 @@ playground project to get an understanding how processing csv files in an event 
 ## install
 
 ```bash
+git clone https://github.com/pharindoko/csv-pipe-playground.git
+cd csv-pipe-playground
 make build
 ```
 
