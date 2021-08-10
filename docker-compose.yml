@@ -77,3 +77,25 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
       # copy the sql script to create tables
       - ./sql:/docker-entrypoint-initdb.d
+  graphql:
+    container_name: postgraphile
+    restart: always
+    image: postgraphile
+    build:
+      context: ./graphql
+    depends_on:
+      - postgres
+    ports:
+      - 5433:5433
+    command:
+      [
+        "--connection",
+        "postgres://postgres:postgres@postgres:5432/postgres",
+        "--port",
+        "5433",
+        "--schema",
+        "public",
+        "--append-plugins",
+        "postgraphile-plugin-connection-filter,custom-plugin",
+        "--watch",
+      ]

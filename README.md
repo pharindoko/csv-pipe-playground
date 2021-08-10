@@ -32,3 +32,27 @@ make build
 ```bash
 make run
 ```
+
+## try
+
+Add a csv file into the root directory or a nested directory (works recursively).
+
+### graphql
+
+Open Graphql Playground  
+http://localhost:5433/graphiql
+> new endpoints will be automagically added by postgraphile when a new csv has been added)
+
+### database
+
+Open a DB Connection 
+postgres://postgres:postgres@postgres:5432/postgres
+> recommendation is to use dbeaver
+
+## sidenotes
+
+It might be a discussion point if celery and rabbitmq are a bit too much for this solution.  
+
+But I really enjoyed how easy it is to implement rabbitmq and celery and how stable this works.
+
+Having IO operations and database connections I guess it`s not that bad to split it up into other processes and keep the event handler process lean.
