@@ -31,25 +31,8 @@ def add(filepath: str):
             index=False,
             chunksize=500
         )
-       # jsontest = df.to_json()
-       # print(f'jsonstring: {jsontest[:100]}')
-
-       # conn = psycopg2.connect(host='localhost',
-       #                         user='postgres',
-       #                         password='postgres',
-       #                         database='postgres')  # To remove slash
-       # print(f'connect: {str(conn)}')
-       # cursor = conn.cursor()
-       # cursor.execute(
-       #     f"INSERT INTO public.event (eventdata) VALUES(%s)", (jsontest,))
-       # conn.commit()
-       # print(f'inserted record')
-       # cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
-        # if conn:
-        #     conn.close()
-        #     print('db connection closed')
         gc.collect()
     return
