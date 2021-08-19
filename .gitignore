@@ -1,6 +1,6 @@
 postgres-data/
 **/**.csv
-
+backend/backend/files/**/**
 # Editors
 .idea/
 
