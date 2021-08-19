@@ -1,6 +1,4 @@
 import gc
-import json
-import time
 from pathlib import Path
 
 import pandas as pd
@@ -14,7 +12,6 @@ app = Celery('tasks', broker='pyamqp://guest@localhost//')
 @app.task
 def add(filepath: str):
     print(f'processing file: {filepath}')
-    conn = None
     try:
         df = pd.read_csv(filepath)
         db_uri = 'postgresql+psycopg2://postgres:postgres@localhost:5432/postgres'
@@ -24,13 +21,11 @@ def add(filepath: str):
         p = Path(filepath)
         print(f'filename: {p.stem}')
 
-        df.to_sql(
-            p.stem[:50],
-            engine,
-            if_exists='replace',
-            index=False,
-            chunksize=500
-        )
+        df.to_sql(p.stem[:50],
+                  engine,
+                  if_exists='replace',
+                  index=False,
+                  chunksize=500)
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
