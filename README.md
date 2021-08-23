@@ -2,7 +2,7 @@
 
 ## what the purpose ?
 
-playground project to get an understanding how processing csv files in an event driven manner can work using python and specific frameworks.
+playground project to get an understanding how processing csv files in an event driven manner using docker-compose and specific frameworks without the use of cloud components.
 
 ![csv pipe playground](/image/csv-pipe-playground.png)
 
@@ -35,25 +35,42 @@ make build
 make run
 ```
 
-## try
+## try out
 
-Add a csv file into the root directory or a nested directory (works recursively).
+### add a csv file
+
+> you have 2 options to start the process
+
+#### using linux
+
+- Add a csv file into the root directory or a nested directory of the source folder (works recursively).
+- This is limited to linux as I`m using Pyinotify which supports IN_CLOSE_WRITE (relies on linux kernel)
+
+#### using macos, windows or linux
+
+1. Open vue application (<http://localhost:3000/>)
+1. Drag and drop csv file(s) or select file(s) via file dialog
+1. Click on button "Upload"
+
+> data will be written into postgre db
 
 ### graphql
 
 Open Graphql Playground  
-http://localhost:5433/graphiql
+<http://localhost:5433/graphiql>
+
 > new endpoints will be automagically added by postgraphile when a new csv has been added)
 
 ### database
 
-Open a DB Connection 
+Open a DB Connection
 postgres://postgres:postgres@postgres:5432/postgres
-> recommendation is to use dbeaver
+
+> recommendation is to use a db client like dbeaver
 
 ## sidenotes
 
-It might be a discussion point if celery and rabbitmq are a bit too much for this solution.  
+It might be a discussion point if celery and rabbitmq are a bit too much for this solution.
 
 But I really enjoyed how easy it is to implement rabbitmq and celery and how stable this works.
 
