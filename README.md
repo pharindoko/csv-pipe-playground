@@ -1,6 +1,6 @@
 # csv-pipe-playground
 
-## what the purpose ?
+## what`s the purpose ?
 
 playground project to get an understanding how processing csv files in an event driven manner using docker-compose and specific frameworks without the use of cloud components.
 
